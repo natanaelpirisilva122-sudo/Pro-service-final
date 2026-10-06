@@ -12,6 +12,13 @@ export const pool = mysql.createPool({
   queueLimit: 0,
   decimalNumbers: true,
   timezone: 'Z',
+  ...(env.NODE_ENV === 'production'
+    ? {
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      }
+    : {}),
 });
 
 export async function checkDatabaseConnection() {
