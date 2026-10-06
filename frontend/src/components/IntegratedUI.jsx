@@ -1,0 +1,11 @@
+import {useEffect,useState} from 'react';
+import MobileShell from './MobileShell';
+import BottomNav from './BottomNav';
+import {api} from '../services/api';
+export const money = v => v == null ? 'A combinar' : Number(v).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+export function Frame({user,title,children}) { return <MobileShell><section className="content-scroll with-bottom-nav app-page"><header className="simple-header polished-header"><div><span className="eyebrow">PRO SERVICE · {user?.tipo === 'PRESTADOR' ? 'PRESTADOR' : 'CLIENTE'}</span><h2>{title}</h2></div><div className={`avatar ${user?.tipo==='PRESTADOR'?'provider-avatar':'profile-avatar'}`}>{user?.nome?.charAt(0)}</div></header>{children}</section><BottomNav role={user?.tipo?.toLowerCase()} /></MobileShell>; }
+export function Notice({error,success}) {return <>{error && <p role="alert" className="error-message">{error}</p>}{success && <p role="status" className="success-message">{success}</p>}</>;}
+export function Field({label,name,...props}) {return <label>{label}<input name={name} {...props}/></label>;}
+export function useResource(path) { const [data,setData]=useState(null),[error,setError]=useState(''),[loading,setLoading]=useState(true),[version,setVersion]=useState(0); useEffect(()=>{let active=true; const ctrl=new AbortController(); setLoading(true);setError(''); api(path,{signal:ctrl.signal}).then(v=>{if(active)setData(v)}).catch(e=>{if(active)setError(e.message)}).finally(()=>{if(active)setLoading(false)}); return ()=>{active=false;ctrl.abort()};},[path,version]); return {data,error,loading,reload:()=>setVersion(v=>v+1)}; }
+export function LoadState({resource}) {return <>{resource.loading && <div className="loading-state"><span></span>Carregando dados…</div>}{resource.error && <div><Notice error={resource.error}/><button className="secondary-button retry-button" onClick={resource.reload}>Tentar novamente</button></div>}</>;}
+export function Pager({page,setPage,total=0}) {if(total<=1)return null;return <div className="pager"><button disabled={page<=1} onClick={()=>setPage(page-1)}>← Anterior</button><span>{page} / {Math.max(1,total)}</span><button disabled={page>=total} onClick={()=>setPage(page+1)}>Próxima →</button></div>;}

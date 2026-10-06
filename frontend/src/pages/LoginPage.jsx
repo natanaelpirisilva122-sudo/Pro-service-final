@@ -1,0 +1,10 @@
+import {useState} from 'react';
+import {Link,useNavigate} from 'react-router-dom';
+import MobileShell from '../components/MobileShell';
+import {Field,Notice} from '../components/IntegratedUI';
+import {api} from '../services/api';
+export default function LoginPage({onLogin,initialError}){
+ const [error,setError]=useState(initialError||''),[busy,setBusy]=useState(false),[role,setRole]=useState('CLIENTE');const navigate=useNavigate();
+ async function submit(e){e.preventDefault();setBusy(true);setError('');const f=new FormData(e.currentTarget);try{const r=await api('/auth/login',{method:'POST',body:{email:f.get('email'),senha:f.get('senha')}});onLogin(r);navigate(r.usuario.tipo==='PRESTADOR'?'/oportunidades':'/home')}catch(e){setError(e.message)}finally{setBusy(false)}}
+ return <MobileShell><header className="top-header"><h2>Pro Service</h2></header><form className="form-area login-card" onSubmit={submit}><div><h1>Bem-vindo de volta</h1><p>Entre para contratar ou gerenciar seus serviços.</p></div><div className="role-switch segmented-control"><button type="button" onClick={()=>setRole('CLIENTE')} className={`role-button ${role==='CLIENTE'?'active':''}`}>Sou Cliente</button><button type="button" onClick={()=>setRole('PRESTADOR')} className={`role-button ${role==='PRESTADOR'?'active':''}`}>Sou Prestador</button></div><div className={`login-info-card ${role==='PRESTADOR'?'provider-mode':''}`}><strong>{role==='CLIENTE'?'Área do Cliente':'Área do Prestador'}</strong><span>{role==='CLIENTE'?'Encontre profissionais e acompanhe suas solicitações.':'Veja oportunidades e gerencie seus atendimentos.'}</span></div><Field label="E-mail" name="email" type="email" autoComplete="username" required/><Field label="Senha" name="senha" type="password" autoComplete="current-password" required/><Notice error={error}/><button className="primary-button" disabled={busy}>{busy?'Entrando…':`Entrar como ${role==='CLIENTE'?'cliente':'prestador'}`}</button><p className="helper-text">Não tem uma conta? <Link to="/cadastro">Crie agora</Link></p></form></MobileShell>;
+}

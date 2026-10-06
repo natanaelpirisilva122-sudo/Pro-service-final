@@ -1,0 +1,13 @@
+PRO SERVICE — VERSÃO CORRIGIDA
+
+Correção aplicada:
+- Tela Minha conta preservada para Cliente e Prestador.
+- Central de ajuda agora é clicável e abre em modal.
+- CSS da central de ajuda integrado ao visual desktop.
+- Nenhuma credencial .env foi incluída no ZIP.
+
+Execução:
+1. backend: npm install, configure/copiar seu .env, npm run dev
+2. frontend: npm install, npm run dev
+
+Se a porta 5173 já estiver em uso, encerre a instância antiga antes de iniciar outra.

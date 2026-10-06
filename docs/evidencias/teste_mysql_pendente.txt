@@ -1,0 +1,32 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> proservice-backend@2.0.0 test:integration
+> node --test tests/integration.test.js
+
+✖ Fluxo real: cadastro, login, perfil, busca, solicitação, conclusão e avaliação (6.788752ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 347.738509
+
+✖ failing tests:
+
+test at tests/integration.test.js:8:1
+✖ Fluxo real: cadastro, login, perfil, busca, solicitação, conclusão e avaliação (6.788752ms)
+  Error: connect ECONNREFUSED 127.0.0.1:3306
+      at TestContext.<anonymous> (file:///workspace/scratch/798fc07c8bb7/ProService_Fase2/backend/tests/integration.test.js:12:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    errno: -111,
+    code: 'ECONNREFUSED',
+    syscall: 'connect',
+    address: '127.0.0.1',
+    port: 3306,
+    fatal: true
+  }

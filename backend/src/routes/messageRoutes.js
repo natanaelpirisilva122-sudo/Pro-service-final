@@ -1,0 +1,10 @@
+import { Router } from 'express';
+import { authenticate } from '../middlewares/auth.js';
+import { asyncHandler } from '../utils/asyncHandler.js';
+import { messageController } from '../controllers/messageController.js';
+export const messageRoutes=Router();
+messageRoutes.use(authenticate);
+messageRoutes.get('/',asyncHandler(messageController.list.bind(messageController)));
+messageRoutes.post('/iniciar',asyncHandler(messageController.start.bind(messageController)));
+messageRoutes.get('/:id',asyncHandler(messageController.get.bind(messageController)));
+messageRoutes.post('/:id',asyncHandler(messageController.send.bind(messageController)));

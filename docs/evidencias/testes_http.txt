@@ -1,0 +1,23 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> proservice-backend@2.0.0 test:http
+> node --test tests/http.test.js
+
+▶ HTTP: acesso, validação e CORS antes da persistência
+  ✔ Rota protegida sem token (30.401955ms)
+  ✔ Token inválido (5.86332ms)
+  ✔ Cadastro incompleto (17.50048ms)
+  ✔ Login inválido (5.663885ms)
+  ✔ Identificador inválido (4.579723ms)
+  ✔ Busca com paginação inválida (4.452428ms)
+  ✔ Rota inexistente (1.998107ms)
+  ✔ Preflight da origem autorizada (3.289393ms)
+✔ HTTP: acesso, validação e CORS antes da persistência (85.15446ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 430.226115

@@ -1,0 +1,6 @@
+
+VERSÃO DESKTOP FINAL CORRIGIDA
+- Layout desktop com sidebar fixa e conteúdo em largura total
+- Home, busca, perfil, mensagens, chat, serviços e conta padronizados
+- Chat integrado ao backend/MySQL
+- .env não incluído por segurança

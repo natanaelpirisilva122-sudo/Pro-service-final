@@ -1,0 +1,16 @@
+PRO SERVICE - VERSAO COMPLETA NOVA
+
+1) BACKEND
+cd ~/Downloads/ProService_COMPLETO_NOVO/backend
+npm install
+# Abra o arquivo .env e informe sua senha do MySQL em DB_PASSWORD.
+npm run dev
+
+2) FRONTEND (em outro Terminal)
+cd ~/Downloads/ProService_COMPLETO_NOVO/frontend
+npm install
+npm run dev
+
+Frontend: http://127.0.0.1:5173
+Backend: http://localhost:3000
+Health: http://localhost:3000/health
